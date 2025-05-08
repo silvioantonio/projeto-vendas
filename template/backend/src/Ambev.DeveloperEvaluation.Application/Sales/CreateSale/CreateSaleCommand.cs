@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Ambev.DeveloperEvaluation.Common.Validation;
+using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
 {
@@ -41,6 +42,17 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
         /// <summary>
         /// Gets or sets the items in the sale.
         /// </summary>
-        public List<SaleItemDto> Items { get; set; } = [];
+        public List<SaleItem> Items { get; set; } = [];
+
+        public ValidationResultDetail Validate()
+        {
+            var validator = new CreateSaleCommandValidator();
+            var result = validator.Validate(this);
+            return new ValidationResultDetail
+            {
+                IsValid = result.IsValid,
+                Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
+            };
+        }
     }
 }
