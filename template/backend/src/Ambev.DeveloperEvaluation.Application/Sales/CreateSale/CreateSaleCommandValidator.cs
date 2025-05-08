@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
         /// Validation rules include:
         /// - SaleNumber: Cannot be empty and must be between 3 and 50 characters
         /// - SaleDate: Cannot be empty and must be less than or equal to the current date
-        /// - CustomerId: Cannot
+        /// - CustomerId: Cannot by empty
         /// - BranchId: Cannot by empty
         /// - TotalAmount: Must be greater than or equal to 0
         /// - Items: Cannot be empty
