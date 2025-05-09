@@ -20,7 +20,7 @@ namespace Ambev.DeveloperEvaluation.Application.Products
     public class CreateProductCommand : IRequest<CreateProductResult>
     {
         /// <summary>
-        /// Gets or sets the name of the product to be created.
+        /// Gets or sets the name. Must be unique and contain only valid characters.
         /// </summary>
         public string Name { get; set; } = string.Empty;
         /// <summary>
