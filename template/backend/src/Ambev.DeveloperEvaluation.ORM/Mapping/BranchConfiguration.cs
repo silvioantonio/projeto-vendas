@@ -17,6 +17,10 @@ namespace Ambev.DeveloperEvaluation.ORM.Mapping
                 .IsRequired()
                 .HasMaxLength(100);
 
+            builder.Property(b => b.Cnpj)
+                .IsRequired()
+                .HasMaxLength(18);
+
             builder.Property(b => b.IsParent)
                 .HasDefaultValue(false);
         }

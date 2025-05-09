@@ -16,6 +16,12 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
+        /// Gets the branch cnpj.
+        /// Must not be null or empty.
+        /// </summary>
+        public string Cnpj { get; set; } = string.Empty;
+
+        /// <summary>
         /// indicates if it is parent branch.
         /// </summary>
         public bool IsParent { get; set; } = false;

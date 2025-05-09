@@ -40,7 +40,6 @@ public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
                b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
         );
 
-
         return new DefaultContext(builder.Options);
     }
 }
