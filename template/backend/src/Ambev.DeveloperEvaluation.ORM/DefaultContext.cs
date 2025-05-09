@@ -36,8 +36,8 @@ public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         builder.UseNpgsql(
-            connectionString,
-            b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM") 
+               connectionString,
+               b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
         );
 
 

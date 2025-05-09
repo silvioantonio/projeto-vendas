@@ -25,7 +25,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        public Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +49,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
         /// <returns>The id list if found, empty list otherwise</returns>
         public async Task<IEnumerable<Guid>> GetExistingProductIdsAsync(List<Guid> productIds, CancellationToken cancellationToken)
         {
-            return await _context.Products.AsNoTracking().Where(p => productIds.Contains(p.Id)).Select(p => p.Id).ToListAsync(cancellationToken);
+                return await _context.Products.AsNoTracking().Where(p => productIds.Contains(p.Id)).Select(p => p.Id).ToListAsync(cancellationToken);
         }
     }
 }
