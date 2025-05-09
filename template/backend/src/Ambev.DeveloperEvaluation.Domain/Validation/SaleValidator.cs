@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Validation;
 using FluentValidation;
 
 public class SaleValidator : AbstractValidator<Sale>
