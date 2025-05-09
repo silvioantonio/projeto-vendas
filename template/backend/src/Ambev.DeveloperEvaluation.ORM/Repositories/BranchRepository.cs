@@ -20,9 +20,39 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             _context = context;
         }
 
-        public async Task<Branch?> GetByIdAsync(Guid branchId, CancellationToken cancellationToken)
+        /// <summary>
+        /// Creates a new branch in the database
+        /// </summary>
+        /// <param name="branch">The branch to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The created branch</returns>
+        public async Task<Branch> CreateAsync(Branch branch, CancellationToken cancellationToken = default)
         {
-            return await _context.Branchs.FirstOrDefaultAsync(o => o.Id == branchId, cancellationToken);
+            await _context.Branchs.AddAsync(branch, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+            return branch;
+        }
+
+        /// <summary>
+        /// Retrieves a branch by their unique identifier
+        /// </summary>
+        /// <param name="id">The unique identifier of the branch</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The branch if found, null otherwise</returns>
+        public async Task<Branch?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Branchs.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+        }
+
+        /// <summary>
+        /// Retrieves a branch by their cnpj
+        /// </summary>
+        /// <param name="cnpj">The cnpj to search for</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The branch if found, null otherwise</returns>
+        public async Task<Branch?> GetByCnpjAsync(string cnpj, CancellationToken cancellationToken = default)
+        {
+            return await _context.Branchs.FirstOrDefaultAsync(u => u.Cnpj == cnpj, cancellationToken);
         }
     }
 }
