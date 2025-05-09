@@ -31,7 +31,7 @@ public class Sale : BaseEntity
 
     public void TotalCalculation()
     {
-        Total = Items.Sum(item => item.TotalCalculation());
+        Total = Items.Sum(item => item.Total);
     }
 
     public void Cancel()

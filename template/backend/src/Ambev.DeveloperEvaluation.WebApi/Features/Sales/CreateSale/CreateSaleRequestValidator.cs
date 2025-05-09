@@ -1,14 +1,14 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale
 {
     /// <summary>
-    /// Validator for CreateSaleCommand that defines validation rules for Sale creation command.
+    /// Validator for CreateSalerRequest that defines validation rules for sale creation.
     /// </summary>
-    public class CreateSaleCommandValidator : AbstractValidator<CreateSaleCommand>
+    public class CreateSaleRequestValidator : AbstractValidator<CreateSaleRequest>
     {
         /// <summary>
-        /// Initializes a new instance of the CreateSaleCommandValidator with defined validation rules.
+        /// Initializes a new instance of the CreateSalerRequestValidator with defined validation rules.
         /// </summary>
         /// <remarks>
         /// Validation rules include:
@@ -19,7 +19,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
         /// - TotalAmount: Must be greater than or equal to 0
         /// - Items: Cannot be empty
         /// </remarks>
-        public CreateSaleCommandValidator()
+        public CreateSaleRequestValidator()
         {
             RuleFor(sale => sale.SaleNumber).NotEmpty().Length(3, 50);
             RuleFor(sale => sale.SaleDate).NotEmpty().LessThanOrEqualTo(DateTime.UtcNow);

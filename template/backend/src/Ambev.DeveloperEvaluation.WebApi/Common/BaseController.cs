@@ -34,4 +34,7 @@ public class BaseController : ControllerBase
                 TotalCount = pagedList.TotalCount,
                 Success = true
             });
+
+    protected IActionResult NotImplemented(string message = "Method not implemented yet.") =>
+        base.NotFound(new ApiResponse { Message = message, Success = false });
 }
