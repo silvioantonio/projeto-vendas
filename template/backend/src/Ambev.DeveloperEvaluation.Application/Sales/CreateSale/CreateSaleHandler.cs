@@ -60,6 +60,8 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
                 throw new InvalidOperationException("Total amount is inconsistent with the sum of item totals.");
 
             var sale = mapper.Map<Sale>(command);
+            sale.CustomerName = existingUser.Username;
+            sale.BranchName = existingBranch.Name;
 
             var createdSale = await saleRepository.CreateAsync(sale, cancellationToken);
             var result = mapper.Map<CreateSaleResult>(createdSale);
