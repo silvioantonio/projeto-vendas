@@ -16,7 +16,7 @@ internal static class SaleTestData
         return new Sale
         {
             SaleNumber = "SALE12345",
-            SaleDate = DateTime.UtcNow,
+            SaleDate = DateTime.UtcNow.Date,
             CustomerId = Guid.NewGuid(),
             CustomerName = "Valid Customer",
             BranchId = Guid.NewGuid(),
