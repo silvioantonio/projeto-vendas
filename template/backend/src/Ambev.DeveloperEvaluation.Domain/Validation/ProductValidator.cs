@@ -9,8 +9,9 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
         {
             RuleFor(product => product.Name)
                 .NotEmpty()
-                .MinimumLength(3).WithMessage("Username must be at least 3 characters long.")
-                .MaximumLength(50).WithMessage("Username cannot be longer than 50 characters.");
+                .MinimumLength(3).WithMessage("Product name must be at least 3 characters long.")
+                .MaximumLength(50).WithMessage("Product name cannot be longer than 50 characters.")
+                .Matches(@"^[a-zA-ZÀ-ÿ\s]+$").WithMessage("Product name must contain only letters.");
 
             RuleFor(product => product.Description)
                 .NotEmpty()
