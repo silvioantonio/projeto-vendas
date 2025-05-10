@@ -19,7 +19,6 @@ namespace Ambev.DeveloperEvaluation.Application.Branchs.CreateBranch
         /// </summary>
         /// <param name="branchRepository">The branch repository</param>
         /// <param name="mapper">The AutoMapper instance</param>
-        /// <param name="validator">The validator for CreateBranchCommand</param>
         public CreateBranchHandler(IBranchRepository branchRepository, IMapper mapper)
         {
             _branchRepository = branchRepository;

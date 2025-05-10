@@ -19,7 +19,6 @@ namespace Ambev.DeveloperEvaluation.Application.Products
         /// </summary>
         /// <param name="productRepository">The product repository</param>
         /// <param name="mapper">The AutoMapper instance</param>
-        /// <param name="validator">The validator for CreateProductCommand</param>
         public CreateProductHandler(IProductRepository productRepository, IMapper mapper)
         {
             _productRepository = productRepository;

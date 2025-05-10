@@ -11,7 +11,6 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
     /// </summary>
     /// <param name="saleRepository">The sale repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
-    /// <param name="validator">The validator for CreateSaleCommand</param>
     public class CreateSaleHandler(ISaleRepository saleRepository, IUserRepository userRepository, IBranchRepository branchRepository, IProductRepository productRepository, IMapper mapper) : IRequestHandler<CreateSaleCommand, CreateSaleResult>
     {
 
