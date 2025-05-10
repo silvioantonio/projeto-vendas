@@ -13,7 +13,7 @@ public class SaleValidator : AbstractValidator<Sale>
 
         RuleFor(sale => sale.SaleDate)
             .NotEmpty().WithMessage("Sale date cannot be empty.")
-            .LessThanOrEqualTo(DateTime.UtcNow).WithMessage("Sale date cannot be in the future.");
+            .LessThanOrEqualTo(DateTime.UtcNow.Date).WithMessage("Sale date cannot be in the future.");
 
         RuleFor(sale => sale.CustomerId)
             .NotEmpty().WithMessage("Customer ID cannot be empty.");
