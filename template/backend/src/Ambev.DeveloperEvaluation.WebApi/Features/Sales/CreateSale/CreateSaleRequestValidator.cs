@@ -22,7 +22,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale
         public CreateSaleRequestValidator()
         {
             RuleFor(sale => sale.SaleNumber).NotEmpty().Length(3, 50);
-            RuleFor(sale => sale.SaleDate).NotEmpty().LessThanOrEqualTo(DateTime.UtcNow);
+            RuleFor(sale => sale.SaleDate).NotEmpty().LessThanOrEqualTo(DateTime.UtcNow.Date);
             RuleFor(sale => sale.CustomerId).NotEmpty();
             RuleFor(sale => sale.BranchId).NotEmpty();
             RuleFor(sale => sale.TotalAmount).GreaterThanOrEqualTo(0);
