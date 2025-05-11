@@ -1,5 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Domain.Validation
 {
