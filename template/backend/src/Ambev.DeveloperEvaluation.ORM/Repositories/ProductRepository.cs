@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories
 {
@@ -33,9 +34,15 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             return product;
         }
 
-        public Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        /// <summary>
+        /// Retrieves a product by id
+        /// </summary>
+        /// <param name="id">The id to search for</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The product if found, null otherwise</returns>
+        public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _context.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         }
 
         /// <summary>
