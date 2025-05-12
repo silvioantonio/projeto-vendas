@@ -34,6 +34,8 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
       * ➡️ [Download .NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
   * **[Docker](https://www.docker.com/get-started/):** O Docker é necessário para executar o banco de dados PostgreSQL e a aplicação em containers isolados.
       * ➡️ [Download Docker](https://www.docker.com/get-started/)
+	  
+O sistema operacional utilizado sera o Windows, então os comandos seguintes serão sempre referentes a ele.
 
 ### 2\. 💾 Clonando o Repositório
 
@@ -41,19 +43,25 @@ Primeiro, clone o repositório do projeto para sua máquina local utilizando o G
 
 
     Bash
-    git clone [https://github.com/silvioantonio/projeto-vendas.git](https://github.com/silvioantonio/projeto-vendas.git)
+    git clone https://github.com/silvioantonio/projeto-vendas.git
     cd projeto-vendas
-    git checkout feature/cadastra-venda
-    sudo make install
+    git checkout master
 
-Certifique-se de fazer o checkout para a branch feature/cadastra-venda para trabalhar com a versão mais recente do recurso de cadastro de vendas.
+Certifique-se de fazer o checkout para a branch master para trabalhar com a versão mais recente do recurso de cadastro de vendas.
+
 
 ### 3\. 🐳 Iniciando os Containers Docker
+IMPORTANTE: Você deve estar com o docker descktop aberto em seu sistema.
+
+Agora navegue ate o nivel do arquivo do docker 
+	Bash
+	cd template/backend/
+	
 Utilize o Docker Compose para iniciar os containers da aplicação e do banco de dados em segundo plano:
 
     Bash
     docker-compose up -d
-    Este comando irá construir as imagens (se necessário) e iniciar os containers definidos no arquivo docker-compose.yml.
+    Este comando irá construir as imagens (se necessário) e iniciar os containers definidos no arquivo docker-compose.yml, este passo pode levar alguns minutos.
 
 Após subir o conteiner, verifique se estão prontos para receber conexões utilizando o comando a baixo:
 
@@ -71,18 +79,29 @@ O nome do container se encontra no arquivo [docker-compose](https://github.com/s
 Observe a saída dos logs para mensagens como "Servidor iniciado", "Listening on port...", etc.
 
 ### 4\. ⚙️ Aplicando as Migrações do Banco de Dados
-As migrações do Entity Framework Core são necessárias para criar o esquema do banco de dados. Execute o seguinte comando dentro do diretório src/ProjetoVendas.Infrastructure:
+As migrações do Entity Framework Core são necessárias para criar o esquema do banco de dados. Execute o seguinte comando dentro do diretório src/:
 
     Bash
-    dotnet ef database update
+     dotnet ef database update --project Ambev.DeveloperEvaluation.ORM --startup-project Ambev.DeveloperEvaluation.WebApi
     Este comando irá aplicar as migrações pendentes ao banco de dados PostgreSQL.
+	
+*Lembre-se de que o container do PostgreSQL precisa estar rodando para que a conexão seja bem-sucedida. Você pode verificar o status dos seus containers com o comando docker ps. Se o container ambev_developer_evaluation_database não estiver rodando, você precisará iniciá-lo com docker-compose up -d (executado no diretório onde o seu arquivo docker-compose.yml está)*
+	
+Caso você receba um erro similar a: **Não foi possível executar porque o comando ou arquivo especificado não foi encontrado.**
+Isso pode ter sido causado por falta de instalação do entity.
+As ferramentas *dotnet ef* são instaladas como uma ferramenta global do .NET. Use o seguinte comando para instalá-las (ou reinstalá-las se você já as tiver):
+
+	Bash
+	dotnet tool install --global dotnet-ef
+
 
 ### 5\. 🚀 Executando a Aplicação
-Finalmente, para executar a API, navegue até o diretório src/ProjetoVendas.Api no seu terminal e execute o seguinte comando:
+Finalmente, para executar a API, navegue até o diretório src/Ambev.DeveloperEvaluation.WebApi no seu terminal e execute o seguinte comando:
 
     Bash
     dotnet run
-Após a execução, a API estará acessível através da URL: http://localhost:5000. Você poderá interagir com a documentação da API utilizando o Swagger, que geralmente está disponível em uma rota como http://localhost:5000/swagger.
+	
+Após a execução, a API estará acessível através da URL: http://localhost:5119. Você poderá interagir com a documentação da API utilizando o Swagger, que geralmente está disponível em uma rota como http://localhost:5119/swagger/index.html.
 
 Duas outras opções muito boas para fazer as chamadas são:
 * Utilizar a ferramenta **[Postman](https://www.postman.com)**, com ela você será capaz de fazer chamadas diretamente nas rotas expostas da aplicação.
