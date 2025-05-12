@@ -36,12 +36,15 @@ public class DeleteSaleHandler : IRequestHandler<DeleteSaleCommand, DeleteSaleRe
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var success = await _saleRepository.DeleteAsync(request.Id, cancellationToken);
-        if (!success)
+        var sale = await _saleRepository.GetByIdAsync(request.Id, cancellationToken);
+        if (sale == null)
             throw new KeyNotFoundException($"Sale with ID {request.Id} not found");
 
-        //TODO: Criar um midleware para tratar os erros de forma mais generica e padronizada.
+        if (sale.Cancelled)
+            throw new InvalidOperationException($"Sale with ID {request.Id} is already cancelled");
 
-        return new DeleteSaleResponse { Success = true };
+        var success = await _saleRepository.DeleteAsync(request.Id, cancellationToken);
+
+        return new DeleteSaleResponse { Success = success };
     }
 }
