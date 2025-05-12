@@ -39,49 +39,54 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 
 Primeiro, clone o repositório do projeto para sua máquina local utilizando o Git:
 
-bash
-git clone [https://github.com/silvioantonio/projeto-vendas.git](https://github.com/silvioantonio/projeto-vendas.git)
-cd projeto-vendas
-git checkout feature/cadastra-venda
+
+    Bash
+    git clone [https://github.com/silvioantonio/projeto-vendas.git](https://github.com/silvioantonio/projeto-vendas.git)
+    cd projeto-vendas
+    git checkout feature/cadastra-venda
+    sudo make install
 
 Certifique-se de fazer o checkout para a branch feature/cadastra-venda para trabalhar com a versão mais recente do recurso de cadastro de vendas.
 
-### 3\. ⚙️ Configurando as Variáveis de Ambiente
-Na raiz do projeto, crie um arquivo chamado .env e adicione as seguintes variáveis de ambiente com suas respectivas configurações:
-
-Snippet de código <br>
-
-DB_HOST=localhost <br>
-DB_PORT=5432 <br>
-DB_NAME=projeto_vendas <br>
-DB_USER=seu_usuario <br>
-DB_PASSWORD=sua_senha <br>
-
-Importante: Substitua seu_usuario e sua_senha pelas credenciais do seu banco de dados PostgreSQL.
-
-### 4\. 🐳 Iniciando os Containers Docker
+### 3\. 🐳 Iniciando os Containers Docker
 Utilize o Docker Compose para iniciar os containers da aplicação e do banco de dados em segundo plano:
 
-Bash
+    Bash
+    docker-compose up -d
+    Este comando irá construir as imagens (se necessário) e iniciar os containers definidos no arquivo docker-compose.yml.
 
-docker-compose up -d
-Este comando irá construir as imagens (se necessário) e iniciar os containers definidos no arquivo docker-compose.yml.
+Após subir o conteiner, verifique se estão prontos para receber conexões utilizando o comando a baixo:
 
-### 5\. ⚙️ Aplicando as Migrações do Banco de Dados
+    Bash
+    docker ps
+
+Este comando lista os containers em execução. Se o seu container estiver listado com o status "Up", significa que o processo principal dentro do container está rodando. No entanto, isso não garante que a aplicação dentro do container esteja totalmente inicializada e pronta para aceitar conexões.
+
+Você pode acompanhar os logs do container para verificar se a aplicação iniciou sem erros e se exibiu alguma mensagem indicando que está pronta para receber conexões. Use o comando *docker logs*
+
+    Bash
+    docker logs <nomeDoContainer> -f
+
+O nome do container se encontra no arquivo [docker-compose](https://github.com/silvioantonio/projeto-vendas/blob/master/template/backend/docker-compose.yml)
+Observe a saída dos logs para mensagens como "Servidor iniciado", "Listening on port...", etc.
+
+### 4\. ⚙️ Aplicando as Migrações do Banco de Dados
 As migrações do Entity Framework Core são necessárias para criar o esquema do banco de dados. Execute o seguinte comando dentro do diretório src/ProjetoVendas.Infrastructure:
 
-Bash
+    Bash
+    dotnet ef database update
+    Este comando irá aplicar as migrações pendentes ao banco de dados PostgreSQL.
 
-dotnet ef database update
-Este comando irá aplicar as migrações pendentes ao banco de dados PostgreSQL.
-
-### 6\. 🚀 Executando a Aplicação
+### 5\. 🚀 Executando a Aplicação
 Finalmente, para executar a API, navegue até o diretório src/ProjetoVendas.Api no seu terminal e execute o seguinte comando:
 
-Bash
-
-dotnet run
+    Bash
+    dotnet run
 Após a execução, a API estará acessível através da URL: http://localhost:5000. Você poderá interagir com a documentação da API utilizando o Swagger, que geralmente está disponível em uma rota como http://localhost:5000/swagger.
+
+Duas outras opções muito boas para fazer as chamadas são:
+* Utilizar a ferramenta **[Postman](https://www.postman.com)**, com ela você será capaz de fazer chamadas diretamente nas rotas expostas da aplicação.
+* Utilziar a ferramenta **[Insomnia](https://insomnia.rest/)**, ela é similar ao postman e também é capaz de fazer as chamadas diretamente nos endpoints.
 
 `READ CAREFULLY`
 
