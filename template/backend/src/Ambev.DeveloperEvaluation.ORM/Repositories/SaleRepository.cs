@@ -32,9 +32,26 @@ public class SaleRepository : ISaleRepository
         return sale;
     }
 
-    public Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Changes the status of a sale to cancelled to mantain the history
+    /// </summary>
+    /// <param name="id">The unique identifier of the sale to delete</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>True if the sale was deleted, false if not found</returns>
+    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var sale = await GetByIdAsync(id, cancellationToken);
+        if (sale == null)
+            return false;
+
+        sale.Cancel();
+
+        //TODO: Criar uma tabela de log para manter o histórico de vendas canceladas.
+        //TODO: Aplicar uma estrutura de cancelamento logico e adicionar limpeza programada no banco de dados.
+
+        _context.Sales.Update(sale);
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
     }
 
     public Task<IEnumerable<Sale>> GetAllAsync(int page, int itensPage)
