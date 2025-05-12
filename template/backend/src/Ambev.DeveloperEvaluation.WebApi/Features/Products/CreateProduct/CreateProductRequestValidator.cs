@@ -19,8 +19,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct
         /// </remarks>
         public CreateProductRequestValidator()
         {
-            RuleFor(product => product.Name).NotEmpty().Length(3, 50);
-            RuleFor(product => product.Description).NotEmpty().Length(3, 300);
+            RuleFor(product => product.Name).NotEmpty().Length(3, 50).WithMessage("Name must be between 3 and 50 characters");
+            RuleFor(product => product.Description).NotEmpty().Length(3, 300).WithMessage("Description must be between 3 and 300 characters");
             RuleFor(product => product.Price).GreaterThanOrEqualTo(0);
         }
     }
