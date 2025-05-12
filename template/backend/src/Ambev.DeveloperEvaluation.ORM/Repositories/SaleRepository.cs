@@ -81,8 +81,9 @@ public class SaleRepository : ISaleRepository
         return await _context.Sales.FirstOrDefaultAsync(o => o.SaleNumber == saleNumber, cancellationToken);
     }
 
-    public Task UpdateAsync(Sale sale, CancellationToken cancellationToken = default)
+    public async Task UpdateAsync(Sale sale, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        _context.Sales.Update(sale);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }
