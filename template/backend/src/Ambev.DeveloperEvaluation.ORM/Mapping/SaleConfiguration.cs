@@ -47,8 +47,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Mapping
                 .IsRequired();
 
             builder.HasMany(s => s.Items)
-                .WithOne()
-                .HasForeignKey(i => i.Id)
+                .WithOne(si => si.Sale)
+                .HasForeignKey(si => si.SaleId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
