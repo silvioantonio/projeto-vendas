@@ -28,10 +28,18 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
             if (!validationResult.IsValid)
                 throw new ValidationException(validationResult.Errors);
 
-            var existingSale = await saleRepository.GetBySaleNumberAsync(command.SaleNumber, cancellationToken) ?? throw new InvalidOperationException($"SaleNumber {command.SaleNumber} already exists.");
+            var existingSale = await saleRepository.GetBySaleNumberAsync(command.SaleNumber, cancellationToken);
+            if (existingSale != null)
+            {
+                throw new InvalidOperationException($"Sale with SaleNumber {command.SaleNumber} already exists");
+            }
 
             var existingUser = await userRepository.GetByIdAsync(command.CustomerId, cancellationToken) ?? throw new InvalidOperationException($"User with ID {command.CustomerId} does not exist");
-            
+            if (existingUser.Status != Domain.Enums.UserStatus.Active)
+            {
+                throw new InvalidOperationException($"User with ID {command.CustomerId} is not active");
+            }
+
             var existingBranch = await branchRepository.GetByIdAsync(command.BranchId, cancellationToken) ?? throw new InvalidOperationException($"Branch with ID {command.BranchId} does not exist");
             
             if (command.Items == null || command.Items.Count == 0)
