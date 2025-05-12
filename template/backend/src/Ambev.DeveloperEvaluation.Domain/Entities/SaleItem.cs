@@ -15,6 +15,8 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public decimal UnitPrice { get; set; }
         public decimal Discount { get; private set; }
         public decimal Total { get; private set; }
+        public Guid SaleId { get; set; }
+        public Sale Sale { get; set; }
 
         public SaleItem() { }
 

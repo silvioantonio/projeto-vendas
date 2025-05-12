@@ -14,5 +14,20 @@
         /// </summary>
         /// <value>A GUID that uniquely identifies the created branch in the system.</value>
         public Guid Id { get; set; }
+
+        /// <summary>
+        /// Gets the branch name.
+        /// </summary>
+        public string Name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets the branch cnpj.
+        /// </summary>
+        public string Cnpj { get; set; } = string.Empty;
+
+        /// <summary>
+        /// indicates if it is parent branch.
+        /// </summary>
+        public bool IsParent { get; set; } = false;
     }
 }

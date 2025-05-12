@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale
@@ -14,7 +15,12 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale
         public CreateSaleProfile()
         {
             CreateMap<CreateSaleRequest, CreateSaleCommand>();
+
             CreateMap<CreateSaleResult, CreateSaleResponse>();
+
+            CreateMap<CreateSaleItemResult, CreateSaleItemResponse>();
+
+            CreateMap<CreateSaleItemRequest, SaleItem>();
         }
     }
 }
