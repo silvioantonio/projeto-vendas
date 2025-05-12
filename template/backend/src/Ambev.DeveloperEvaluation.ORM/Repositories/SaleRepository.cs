@@ -42,11 +42,23 @@ public class SaleRepository : ISaleRepository
         throw new NotImplementedException();
     }
 
-    public Task<Sale> GetByIdAsync(Guid id)
+    /// <summary>
+    /// Gets a sale in the repository by Id
+    /// </summary>
+    /// <param name="id">The parameter used to search for</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The sale</returns>
+    public async Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await _context.Sales.Include(s => s.Items).FirstOrDefaultAsync(s => s.Id == id);
     }
 
+    /// <summary>
+    /// Gets a sale in the repository by sale number
+    /// </summary>
+    /// <param name="saleNumber">The parameter used to search for</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The sale</returns>
     public async Task<Sale?> GetBySaleNumberAsync(string saleNumber, CancellationToken cancellationToken)
     {
         return await _context.Sales.FirstOrDefaultAsync(o => o.SaleNumber == saleNumber, cancellationToken);

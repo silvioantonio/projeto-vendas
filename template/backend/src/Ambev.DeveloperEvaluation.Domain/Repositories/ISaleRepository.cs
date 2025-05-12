@@ -12,7 +12,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Repositories
         /// </summary>
         /// <param name="id">The unique identifier of the sale</param>
         /// <returns>The sale if found, null otherwise</returns>
-        Task<Sale> GetByIdAsync(Guid id);
+        Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
         /// <summary>
         /// Retrieves a list of sale.
         /// </summary>
