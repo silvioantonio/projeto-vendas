@@ -20,9 +20,17 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
             _context = context;
         }
 
+        /// <summary>
+        /// Create a new product.
+        /// </summary>
+        /// <param name="product">The product to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The created product</returns>
         public async Task<Product> CreateAsync(Product product, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _context.Products.AddAsync(product, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+            return product;
         }
 
         public Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken)

@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.Products
+namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct
 {
     /// <summary>
     /// Command for creating a new product.

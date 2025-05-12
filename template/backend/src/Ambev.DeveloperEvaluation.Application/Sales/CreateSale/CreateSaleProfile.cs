@@ -13,8 +13,10 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
         /// </summary>
         public CreateSaleProfile()
         {
-            CreateMap<CreateSaleCommand, Sale>();
+            CreateMap<CreateSaleCommand, Sale>()
+            .ForMember(dest => dest.SaleDate, opt => opt.MapFrom(src => DateTime.SpecifyKind(src.SaleDate, DateTimeKind.Utc)));
             CreateMap<Sale, CreateSaleResult>();
+            CreateMap<SaleItem, CreateSaleItemResult>();
         }
     }
 }

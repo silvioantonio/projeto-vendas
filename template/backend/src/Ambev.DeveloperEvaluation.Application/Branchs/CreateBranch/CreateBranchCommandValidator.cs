@@ -19,8 +19,7 @@ namespace Ambev.DeveloperEvaluation.Application.Branchs.CreateBranch
         {
             RuleFor(branch => branch.Name).NotEmpty().Length(3, 50);
             RuleFor(branch => branch.Cnpj)
-                .Matches(@"^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$")
-                .WithMessage("CNPJ must be in the format XX.XXX.XXX/XXXX-XX");
+                .Matches(@"^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$");
         }
     }
 }
