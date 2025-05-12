@@ -32,9 +32,26 @@ public class SaleRepository : ISaleRepository
         return sale;
     }
 
-    public Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Changes the status of a sale to cancelled to mantain the history
+    /// </summary>
+    /// <param name="id">The unique identifier of the sale to delete</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>True if the sale was deleted, false if not found</returns>
+    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var sale = await GetByIdAsync(id, cancellationToken);
+        if (sale == null)
+            return false;
+
+        sale.Cancel();
+
+        //TODO: Criar uma tabela de log para manter o histórico de vendas canceladas.
+        //TODO: Aplicar uma estrutura de cancelamento logico e adicionar limpeza programada no banco de dados.
+
+        _context.Sales.Update(sale);
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
     }
 
     public Task<IEnumerable<Sale>> GetAllAsync(int page, int itensPage)
@@ -42,11 +59,23 @@ public class SaleRepository : ISaleRepository
         throw new NotImplementedException();
     }
 
-    public Task<Sale> GetByIdAsync(Guid id)
+    /// <summary>
+    /// Gets a sale in the repository by Id
+    /// </summary>
+    /// <param name="id">The parameter used to search for</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The sale</returns>
+    public async Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await _context.Sales.Include(s => s.Items).FirstOrDefaultAsync(s => s.Id == id);
     }
 
+    /// <summary>
+    /// Gets a sale in the repository by sale number
+    /// </summary>
+    /// <param name="saleNumber">The parameter used to search for</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The sale</returns>
     public async Task<Sale?> GetBySaleNumberAsync(string saleNumber, CancellationToken cancellationToken)
     {
         return await _context.Sales.FirstOrDefaultAsync(o => o.SaleNumber == saleNumber, cancellationToken);
