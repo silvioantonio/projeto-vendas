@@ -1,5 +1,88 @@
 # Developer Evaluation Project
 
+<br>
+
+# 🛒 Projeto Vendas: Uma API Moderna com .NET 8
+
+Este projeto consiste em uma API RESTful robusta e escalável para gerenciamento de vendas, construída com as mais recentes tecnologias .NET.
+
+<br>
+
+## 🛠️ Tecnologias de Ponta Utilizadas
+
+Este projeto foi desenvolvido utilizando um conjunto de ferramentas modernas e eficientes:
+
+  * **[.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0):** O mais recente framework de desenvolvimento da Microsoft, oferecendo performance e recursos avançados para a construção de aplicações modernas.
+  * **[ASP.NET Core](https://learn.microsoft.com/pt-br/aspnet/core/?view=aspnetcore-8.0):** Um framework poderoso para a criação de APIs RESTful e aplicações web de alta performance.
+  * **[Entity Framework Core](https://learn.microsoft.com/pt-br/ef/core/):** Um Object-Relational Mapper (ORM) que facilita a interação com o banco de dados de forma elegante e produtiva.
+  * **[PostgreSQL](https://www.postgresql.org/):** Um sistema de gerenciamento de banco de dados relacional (SGBDR) robusto, confiável e de código aberto.
+  * **[Docker](https://www.docker.com/):** Uma plataforma de conteinerização que simplifica a implantação e o gerenciamento da aplicação e do banco de dados em diferentes ambientes.
+  * **[xUnit.net](https://xunit.net/):** Um framework moderno para a criação de testes unitários e de integração automatizados, garantindo a qualidade e a estabilidade do código.
+  * **[Swagger/OpenAPI](https://swagger.io/):** Uma ferramenta essencial para a documentação interativa da API, permitindo que os desenvolvedores explorem e testem os endpoints de forma fácil.
+
+<br>
+
+## 🚀 Primeiros Passos: Executando o Projeto
+
+Siga estas instruções para configurar e executar o projeto em seu ambiente local:
+
+### 1\. ⚙️ Pré-requisitos
+
+Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
+
+  * **[.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0):** Você precisará do SDK para compilar e executar a aplicação .NET.
+      * ➡️ [Download .NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+  * **[Docker](https://www.docker.com/get-started/):** O Docker é necessário para executar o banco de dados PostgreSQL e a aplicação em containers isolados.
+      * ➡️ [Download Docker](https://www.docker.com/get-started/)
+
+### 2\. 💾 Clonando o Repositório
+
+Primeiro, clone o repositório do projeto para sua máquina local utilizando o Git:
+
+bash
+git clone [https://github.com/silvioantonio/projeto-vendas.git](https://github.com/silvioantonio/projeto-vendas.git)
+cd projeto-vendas
+git checkout feature/cadastra-venda
+
+Certifique-se de fazer o checkout para a branch feature/cadastra-venda para trabalhar com a versão mais recente do recurso de cadastro de vendas.
+
+### 3\. ⚙️ Configurando as Variáveis de Ambiente
+Na raiz do projeto, crie um arquivo chamado .env e adicione as seguintes variáveis de ambiente com suas respectivas configurações:
+
+Snippet de código <br>
+
+DB_HOST=localhost <br>
+DB_PORT=5432 <br>
+DB_NAME=projeto_vendas <br>
+DB_USER=seu_usuario <br>
+DB_PASSWORD=sua_senha <br>
+
+Importante: Substitua seu_usuario e sua_senha pelas credenciais do seu banco de dados PostgreSQL.
+
+### 4\. 🐳 Iniciando os Containers Docker
+Utilize o Docker Compose para iniciar os containers da aplicação e do banco de dados em segundo plano:
+
+Bash
+
+docker-compose up -d
+Este comando irá construir as imagens (se necessário) e iniciar os containers definidos no arquivo docker-compose.yml.
+
+### 5\. ⚙️ Aplicando as Migrações do Banco de Dados
+As migrações do Entity Framework Core são necessárias para criar o esquema do banco de dados. Execute o seguinte comando dentro do diretório src/ProjetoVendas.Infrastructure:
+
+Bash
+
+dotnet ef database update
+Este comando irá aplicar as migrações pendentes ao banco de dados PostgreSQL.
+
+### 6\. 🚀 Executando a Aplicação
+Finalmente, para executar a API, navegue até o diretório src/ProjetoVendas.Api no seu terminal e execute o seguinte comando:
+
+Bash
+
+dotnet run
+Após a execução, a API estará acessível através da URL: http://localhost:5000. Você poderá interagir com a documentação da API utilizando o Swagger, que geralmente está disponível em uma rota como http://localhost:5000/swagger.
+
 `READ CAREFULLY`
 
 ## Instructions
